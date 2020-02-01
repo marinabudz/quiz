@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+        <link rel="stylesheet" href="quiz.css">
+        <title>QUIZ</title>  
+    </head>
+    <body>
+        <div class="container" id='app'>
+            <div class="row">
+                <div class="col-lg-12  text-center" v-if="selectedVariant==2">
+                    <div class="header font-weight-bold"> Start</div>
+                    <div v-for='(data, index) in quizzes' v-on:click="selectedVariant=index" class="quiz">
+                       <button class="quiz__title font-weight-bold "> {{data.title}} </button>
+                    </div>
+                </div>
+                
+
+                <div v-if="selectedVariant==0"  class="col-lg-12 text-center">
+                    <div class="quiz__score text-right">
+                        Score: {{score}}
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index === 0 && counter === 0'>
+                        <div class="quiz__question">{{data.questions[0].question}}</div>
+                        <div class="quiz__answers ">
+                            <button class="quiz__answersItem" v-on:click="counter++" >{{data.questions[0].answers[0].content}} </button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[1].content}} </button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[2].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[3].content}} </button>
+                        </div>
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index===0 && counter === 1'>
+                        <div class="quiz__question">{{data.questions[1].question}}</div>
+                        <div class="quiz__answers">
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[0].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[1].content}}</button>
+                            <button  class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[2].content}}</button>
+                            <button  class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[3].content}}</button>
+                        </div>
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index===0 && counter ===2'>
+                        <div class="quiz__question">{{data.questions[2].question}}</div>
+                        <div class="quiz__answers">
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[0].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[1].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[2].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[3].content}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div v-if="selectedVariant==1"  class="col-lg-12  text-center">
+                    <div  class="quiz__score text-right">
+                        Score: {{score}}
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index === 1 && counter === 0' >
+                        <div class="quiz__question">{{data.questions[0].question}}</div>
+                        <div class="quiz__answers">
+                            <button class="quiz__answersItem" v-on:click="counter++" >{{data.questions[0].answers[0].content}} </button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[1].content}} </button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[2].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[0].answers[3].content}} </button>
+                        </div>
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index===1 && counter === 1'>
+                        <div class="quiz__question">{{data.questions[1].question}}</div>
+                        <div class="quiz__answers">
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[0].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[1].content}}</button>
+                            <button  class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[2].content}}</button>
+                            <button  class="quiz__answersItem" v-on:click="counter++">{{data.questions[1].answers[3].content}}</button>
+                        </div>
+                    </div>
+                    <div v-on:click='score_handler' v-for='(data,index) in quizzes' v-if='index===1 && counter ===2'>
+                        <div class="quiz__question">{{data.questions[2].question}}</div>
+                        <div class="quiz__answers">
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[0].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[1].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[2].content}}</button>
+                            <button class="quiz__answersItem" v-on:click="counter++">{{data.questions[2].answers[3].content}}</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+      
+
+                <div>
+                    <p v-if="score/2"> score</p>
+                </div>
+              
+                    
+                </div>
+                
+            </div>
+        </div>
+
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="quiz1.js"></script>
+
+    </body>
+    
+</html>
+
+       <!-- <script>
+            import json from 'src/json/quiz.json'
+            export default{
+                name: 'quiz',
+                data(){
+                    return {
+                        myJson : json
+                    }
+                }
+
+
+
+
+            }
+        </script> -->
